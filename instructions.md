@@ -1,6 +1,6 @@
 # Containerized App Exercise
 
-Build a containerized app made up of multiple subsystems each operating in a container.
+Build a containerized app made up of multiple subsystems, each operating in a container.
 
 ## Concept
 
@@ -12,9 +12,9 @@ In this exercise, you will create a system consisting of three separate but inte
 
 The system you will build consists of three independent software sub-systems:
 
-- a machine learning client - a program that performs one more more machine learning tasks on data collected from camera, microphone, or other sensor(s)
-- a web app - an interface through which web visitors can see the activity and analytical results of the machine learning client
-- a database - stores the data used by both other parts
+- a **machine learning client** - a program that performs one more more machine learning tasks on data collected from camera, microphone, or other sensor(s)
+- a **web app** - an interface through which web visitors can see the activity and analytical results of the machine learning client
+- a **database** - stores the data used by both other parts
 
 A few notes:
 
@@ -44,6 +44,7 @@ The machine learning client will be written in Python and will connect to the da
 - Unit tests using [pytest](https://docs.pytest.org/en/7.2.x/) must be written for the client device code that provide at least 50% code coverage of the client code.
 - The client must have a Continuous Integration (CI) workflow using [GitHub Actions](https://github.com/features/actions) that automatically builds and tests the updated client subsystem every time a pull request is approved and code is merged into the `main` branch.
 - Like the other parts, the machine learning client must run within its own Docker container.
+- Put all code for this subsystem within the `machine-learning-client` subdirectory of this repository.
 
 ### Web app
 
@@ -55,6 +56,7 @@ The web app must be built using the Python [flask](https://palletsprojects.com/p
 - Unit tests using `pytest`and [pytest-flask](https://pytest-flask.readthedocs.io/en/latest/) must be written for the web app code that provide at least 80% code coverage of the server code.
 - The web app must have a Continuous Integration / **Continuous Deployment** (CI/**CD**) workflow using [GitHub Actions](https://github.com/features/actions) that automatically builds, tests, and deploys the updated server subsystem every time a pull request is approved and code is merged into the `main` branch.
 - Like the other parts, the web app must run within its own Docker container.
+- Put all code for this subsystem within the `web-app` subdirectory of this repository.
 
 ## Developer workflow
 
