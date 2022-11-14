@@ -22,7 +22,7 @@ A few notes:
 - **What not to include in this repository**: A starter `.gitignore` file has been provided for generic Python programming. However, this should be updated as necessary to make sure that any 3rd-party libraries, modules or other dependencies used by any part of this system are not included in version control. Use `pip` or `pipenv` to document and install any 3rd-party Python software dependencies for both parts independently.
 - **How to start all your containers at once**: Eventually, you must start all your system's containers together using [docker-compose](https://docs.docker.com/compose/) - a tool for starting and configuring multiple docker containers that together are necessary to run a system. However, it recommended to start running each with its own `docker` commands at first until things are more-or-less working as expected, and then integrate `docker-compose` once all parts of your system are running as expected.
 
-More details on each component follow.
+More details on each subsystem follow.
 
 ### Database
 
