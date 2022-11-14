@@ -26,7 +26,7 @@ More details on each subsystem follow.
 
 ### Database
 
-The other two parts of your application will depend upon a [MongoDB](https://mongodb.com) database, run within a Docker container. At a minimum, the machine learning client will store the data it collects in this database, and the web app will read from it. You are welcome to use this databaes for any other duties that befit your application.
+The other two parts of your application will depend upon a [MongoDB](https://mongodb.com) database, run within a Docker container. At a minimum, the machine learning client will store the data it collects in this database, and the web app will read from it. You are welcome to use this database for any other duties that befit your application.
 
 See documentation for running [MongoDB within Docker](https://www.mongodb.com/compatibility/docker). Here is a simple example of how to run a MongoDB container with `docker`:
 
@@ -131,7 +131,7 @@ To merge code from a feature branch into the `main` branch, do the following:
 Replace the contents of the [README.md](./README.md) file with a beautifully-formatted Markdown file including
 
 - a plain-language **description** of your project, including:
-- a [badge](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge) at the top of the `README.md` file showing the result of the latest build/test workflow of the server.
+- two [badges](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge) at the top of the `README.md` file showing the result of the latest build/test workflow of the server both the machine learning client and web app subsystems.
 - the names of all teammates as links to their GitHub profiles in the `README.md` file.
 - instructions for how to configure and run all parts of your project for any developer on any platform - these instructions must work!
 - instructions for how to import any starter data into the database, if necessary for the system to operate correctly at first.
