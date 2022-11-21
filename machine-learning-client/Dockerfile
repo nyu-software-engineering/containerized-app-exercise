@@ -12,6 +12,9 @@ RUN apt install -y ffmpeg libsm6 libxext6  -y
 # RUN apt-get install -y alsa-base alsa-utils
 RUN apt install -y alsa-utils
 
+# install PortAudio library used by Python sounddevice
+RUN apt install -y libportaudio2
+
 # install the Python dependencies
 RUN apt install -y cmake
 RUN python -m pip install --upgrade pip
