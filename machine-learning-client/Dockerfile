@@ -2,8 +2,8 @@
 FROM python:3.9-bullseye 
 
 # update the package manager
-RUN apt update
-RUN apt upgrade
+RUN apt update -y
+RUN apt upgrade -y
 
 # install the OpenCV cv2 dependencies missing from the Docker image
 RUN apt install -y ffmpeg libsm6 libxext6  -y
@@ -13,8 +13,11 @@ RUN apt install -y ffmpeg libsm6 libxext6  -y
 RUN apt install -y alsa-utils
 
 # install the Python dependencies
-RUN pip install --upgrade pip
-RUN pip install pipenv
+RUN apt install -y cmake
+RUN python -m pip install --upgrade pip
+# RUN python -m pip install -U cmake
+
+# RUN pip install pipenv
 
 # create a directory for the app
 RUN mkdir /app
@@ -30,13 +33,18 @@ RUN useradd -m -r beetroot && chown beetroot /app
 USER beetroot
 
 # copy the Pipfiles and install the dependencies... doing this fist may save build time via caching
-COPY Pipfile* .
+# COPY Pipfile* .
+COPY requirements.txt .
 
 # install the app dependencies
-RUN pipenv install
+#RUN pipenv install
+RUN python -m pip install -r requirements.txt
+RUN python -m pip install --upgrade numpy
 
 # copy all the files from the current directory to the app directory
 COPY . .
 
 # when a container is instantiated, run the target script
-CMD ["pipenv", "run", "python", "find_camera_devices.py"]
+# CMD ["pipenv", "run", "python", "find_camera_devices.py"]
+CMD ["python", "find_camera_devices.py"]
+
