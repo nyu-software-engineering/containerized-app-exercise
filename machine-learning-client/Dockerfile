@@ -2,14 +2,15 @@
 FROM python:3.9-bullseye 
 
 # update the package manager
-RUN apt-get update
+RUN apt update
+RUN apt upgrade
 
 # install the OpenCV cv2 dependencies missing from the Docker image
-RUN apt-get install -y ffmpeg libsm6 libxext6  -y
+RUN apt install -y ffmpeg libsm6 libxext6  -y
 
 # install the ALSA sound drivers missing from the Docker image
 # RUN apt-get install -y alsa-base alsa-utils
-RUN apt-get install -y alsa-utils
+RUN apt install -y alsa-utils
 
 # install the Python dependencies
 RUN pip install --upgrade pip
