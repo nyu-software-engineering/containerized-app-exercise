@@ -44,7 +44,7 @@ The machine learning client will be written in Python and will connect to the da
 - The client must do some form of high-level analysis of the data, such as image recognition, speech recognition, classification, aggregation, etc, either using custom code, third-party APIs or code libraries designed for this purpose. In other words, the client must not only collect raw data, but also must compute the results of some additional analysis of that data.
 - Metadata about the collected data, including the results of any analysis performed, must be saved to the database. How frequently the client communicates with the database must make sense for your application.
 - The code must be formatted in accordance with [PEP 8](https://www.python.org/dev/peps/pep-0008/) using the [black](https://black.readthedocs.io/en/stable/) formatter and [pylint](https://pylint.org/) linter to ensure correctness.
-- Unit tests using [pytest](https://docs.pytest.org/en/7.2.x/) must be written for the client device code that provide at least 80% code coverage of the client code.
+- Unit tests using [pytest](https://docs.pytest.org/en/7.2.x/) must be written for the client device code that provide at least 80% code coverage of the client code, as reported by the [coverage](https://coverage.readthedocs.io/) tool.
 - The client must have a Continuous Integration (CI) workflow using [GitHub Actions](https://github.com/features/actions) that automatically builds and tests the updated client subsystem every time a pull request is approved and code is merged into the `main` branch.
 - Like the other parts, the machine learning client must run within its own Docker container.
 - Put all code for this subsystem within the `machine-learning-client` subdirectory of this repository.
