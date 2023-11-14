@@ -128,6 +128,8 @@ To merge code from a feature branch into the `main` branch, do the following:
 1. Delete the feature branch.
 1. Pull the latest changes from the remote `main` branch to your local `main` branch.
 
+All developers are expected to participate in reviewing and approving teammates' pull requests.
+
 **Warning**: the longer you let code sit in a feature branch, the more likely your team is to end up in [merge hell](https://en.wikipedia.org/wiki/Merge_hell). . Merge feature branches into `main` often to avoid this fate.
 
 ## Documentation
