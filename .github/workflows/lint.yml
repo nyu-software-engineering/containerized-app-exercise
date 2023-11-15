@@ -1,5 +1,5 @@
-name: Python Lint and Format
-on: [push]
+name: check lint and format
+on: [push, pull_request]
 
 jobs:
   lint:
