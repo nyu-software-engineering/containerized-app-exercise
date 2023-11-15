@@ -18,7 +18,7 @@ jobs:
           pipenv shell --fancy --python $(which python)
       - name: Lint with pylint
         run: |
-          python -m pylint **/*.py
+          pipenv run pylint **/*.py
       - name: Format with black
         run: |
-          python -m black --diff --check **/*.py
+          pipenv run black --diff --check **/*.py
