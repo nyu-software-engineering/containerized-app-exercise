@@ -1,4 +1,9 @@
-# Delete this file
+'''
+Delete this file.  It's for testing.
+'''
 
 def main():
-  print("foo bar baz bum")
+    '''
+    The main function
+    '''
+    print("foo bar baz bum")
