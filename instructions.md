@@ -70,18 +70,18 @@ Teams are expected to follow a roughly "agile"-style development workflow, with 
 
 ALl teams must use task boards to provide insight into the status of all work.
 
-- The task boards must have at least 4 columns: "To Do", "In Progress", "Awaiting Review", "Done".
+- The task boards must have at least 4 columns: "`To Do`", "`In Progress`", "`Awaiting Review`", "`Done`".
 - Teams must represent all work to be done as discrete tasks on the task board, where each task represents about one day's work for one team member.
 - Each task must be assigned to the developer(s) responsible for implementing it.
 - Each task must be positioned on the board in the appropriate column representing its current status at all times.
 
 ### Standup meetings
 
-Each team must have at least 3 standup meetings per week. In these meetings, each developer must answer three questions:
+Each team must have at least `3` standup meetings per week. In these meetings, each developer must answer three questions:
 
-- what have you done since last meeting?
-- what are you working on now?
-- is anything blocking your way?
+- What have you done since last meeting?
+- What are you working on now?
+- Is anything blocking your way?
 
 One team member must collect the answers each team member gave to each of these questions and post a report of the standup to the team's communication channel. For example:
 
@@ -110,6 +110,8 @@ Pat Sachin @patsach
 - blockers: none
 ```
 
+Blocking problems that the team cannot solve internall must be brought to the attention of the admins/managers immediately.
+
 ### Individual contributions
 
 All team members must have visibly contributed to the code using their own git & GitHub accounts in order to claim that they contributed to the project.
@@ -128,7 +130,7 @@ To merge code from a feature branch into the `main` branch, do the following:
 1. Delete the feature branch.
 1. Pull the latest changes from the remote `main` branch to your local `main` branch.
 
-All developers are expected to participate in reviewing and approving teammates' pull requests.
+All developers are expected to participate in reviewing and approving teammates' pull requests. A [GitHub Actions script](./.github/workflows/lint.yml) is included in this repository that will automatically check the code in every pull request for its adherence to the proper code conventions. If the code does not pass this check, the pull request must not be approved or merged.
 
 **Warning**: the longer you let code sit in a feature branch, the more likely your team is to end up in [merge hell](https://en.wikipedia.org/wiki/Merge_hell). . Merge feature branches into `main` often to avoid this fate.
 
@@ -137,7 +139,7 @@ All developers are expected to participate in reviewing and approving teammates'
 Replace the contents of the [README.md](./README.md) file with a beautifully-formatted Markdown file including
 
 - a plain-language **description** of your project, including:
-- two [badges](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge) at the top of the `README.md` file showing the result of the latest build/test workflow of the server both the machine learning client and web app subsystems.
+- two [badges](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge) at the top of the `README.md` file showing the result of the latest build/test workflow of both the machine learning client and web app subsystems.
 - the names of all teammates as links to their GitHub profiles in the `README.md` file.
 - instructions for how to configure and run all parts of your project for any developer on any platform - these instructions must work!
 - instructions for how to import any starter data into the database, if necessary for the system to operate correctly at first.
