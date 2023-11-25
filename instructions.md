@@ -130,9 +130,17 @@ To merge code from a feature branch into the `main` branch, do the following:
 1. Delete the feature branch.
 1. Pull the latest changes from the remote `main` branch to your local `main` branch.
 
-All developers are expected to participate in reviewing and approving teammates' pull requests. A [GitHub Actions script](./.github/workflows/lint.yml) is included in this repository that will automatically check the code in every pull request for its adherence to the proper code conventions. If the code does not pass this check, the pull request must not be approved or merged.
+All developers are expected to participate in reviewing and approving teammates' pull requests.
 
 **Warning**: the longer you let code sit in a feature branch, the more likely your team is to end up in [merge hell](https://en.wikipedia.org/wiki/Merge_hell). . Merge feature branches into `main` often to avoid this fate.
+
+### Code linting and formatting
+
+A [GitHub Actions workflow script](./.github/workflows/lint.yml) is included in this repository that will automatically run the `pylint` linter and the `black` formatter to check the code in every pull request for its adherence to the proper code conventions. If the code does not pass such a check, the pull request must not be approved or merged.
+
+Due to its general-purpose design, and the fact that it checks all code the same way, regardless of whether that code is part of the web app, machine learning client, or other subsystem, **the given workflow script may not be appropriate for all projects**. You are welcome to modify it as necessary to suit your project's needs, as long as the spirit of the check remains the same.
+
+For example, you may need to set up separate linting and formatting jobs for each subsystem and/or set the linter or formatter to ignore certain files or dependencies, e.g. using `pylint`'s `--ignore` or `--ignored-modules` flags or `black`'s `--exclude` flag. It is up to your team to research and implement any such changes.
 
 ## Documentation
 
