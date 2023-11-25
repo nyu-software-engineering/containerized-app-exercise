@@ -136,11 +136,11 @@ All developers are expected to participate in reviewing and approving teammates'
 
 ### Code linting and formatting
 
-A [GitHub Actions workflow script](./.github/workflows/lint.yml) is included in this repository that will automatically run the `pylint` linter and the `black` formatter to check the code in every pull request for its adherence to the proper code conventions. If the code does not pass such a check, the pull request must not be approved or merged.
+A [GitHub Actions workflow script](./.github/workflows/lint.yml) is included in this repository that will automatically run the `pylint` linter and the `black` formatter in both the `web-app` and `machine-learning-client` subdirectories to check the code in every pull request for its adherence to the proper code conventions. If the code does not pass such a check, the pull request must not be approved or merged.
 
 Due to its general-purpose design, and the fact that it checks all code the same way, regardless of whether that code is part of the web app, machine learning client, or other subsystem, **the given workflow script may not be appropriate for all projects**. You are welcome to modify it as necessary to suit your project's needs, as long as the spirit of the check remains the same.
 
-For example, you may need to set up separate linting and formatting jobs for each subsystem and/or set the linter or formatter to ignore certain files or dependencies, e.g. using `pylint`'s `--ignore` or `--ignored-modules` flags or `black`'s `--exclude` flag. It is up to your team to research and implement any such changes.
+For example, you may need to set up separate linting and formatting jobs for each subsystem and/or set the linter or formatter to ignore certain files or dependencies that are incapable of passing the linter/formatter checks for reasons outside the control of this project's developers, for example by using `pylint`'s `--ignore` or `--ignored-modules` flags or `black`'s `--exclude` flag. It is up to your team to research and implement any such changes.
 
 ## Documentation
 
