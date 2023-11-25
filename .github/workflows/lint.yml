@@ -9,9 +9,6 @@ jobs:
         # repeat same job for each subsystem in the following subdirectories
         subdir: [web-app, machine-learning-client]
     steps:
-      - name: Set working directory
-        run: |
-          working-directory: ${{ matrix.subdir }}
       - uses: actions/checkout@v4
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -25,14 +22,14 @@ jobs:
           pipenv sync --dev --python $(which python)
           pipenv shell --fancy --python $(which python)
       - name: Lint with pylint
-        if: ${{ hashFiles('**/*.py') != '' }}
+        if: ${{ hashFiles(format('{0}/**/*.py'), matrix.subdir) != '' }}
         # you may set pylint to ignore any files or dependencies that make no sense to lint
         run: |
-          pwd
+          cd ${{ matrix.subdir }}}
           pipenv run pylint **/*.py
       - name: Format with black
-        if: ${{ hashFiles('**/*.py') != '' }}
+        if: ${{ hashFiles(format('{0}/**/*.py'), matrix.subdir) != '' }}
         # you may set black to ignore any files or dependencies that make no sense to format
         run: |
-          pwd
+          cd ${{ matrix.subdir }}}
           pipenv run black --diff --check .
