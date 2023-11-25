@@ -2,26 +2,59 @@ name: check lint and format
 on: [push, pull_request]
 
 jobs:
-  lint:
+  lint-web-app:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.10"
+          python-version: "3.10" # update version(s) as needed
       - name: Install dependencies
-        if: ${{ hashFiles('**/*.py') != '' }}
+        if: ${{ hashFiles('web-app/**/*.py') != '' }}
         run: |
+          cd web-app
           python -m pip install --upgrade pip
           python -m pip install pipenv
           pipenv sync --dev --python $(which python)
           pipenv shell --fancy --python $(which python)
       - name: Lint with pylint
-        if: ${{ hashFiles('**/*.py') != '' }}
+        if: ${{ hashFiles('web-app/**/*.py') != '' }}
+        # you may set pylint to ignore any files or dependencies that make no sense to lint
         run: |
+          cd web-app
           pipenv run pylint **/*.py
       - name: Format with black
-        if: ${{ hashFiles('**/*.py') != '' }}
+        if: ${{ hashFiles('web-app/**/*.py') != '' }}
+        # you may set black to ignore any files or dependencies that make no sense to format
         run: |
+          cd web-app
+          pipenv run black --diff --check .
+  lint-machine-learning-client:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10" # update version(s) as needed
+      - name: Install dependencies
+        if: ${{ hashFiles('machine-learning-client/**/*.py') != '' }}
+        run: |
+          cd machine-learning-client
+          python -m pip install --upgrade pip
+          python -m pip install pipenv
+          pipenv sync --dev --python $(which python)
+          pipenv shell --fancy --python $(which python)
+      - name: Lint with pylint
+        if: ${{ hashFiles('machine-learning-client/**/*.py') != '' }}
+        # you may set pylint to ignore any files or dependencies that make no sense to lint
+        run: |
+          cd machine-learning-client
+          pipenv run pylint **/*.py
+      - name: Format with black
+        if: ${{ hashFiles('machine-learning-client/**/*.py') != '' }}
+        # you may set black to ignore any files or dependencies that make no sense to format
+        run: |
+          cd machine-learning-client
           pipenv run black --diff --check .
