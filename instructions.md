@@ -150,4 +150,5 @@ Replace the contents of the [README.md](./README.md) file with a beautifully-for
 - two [badges](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge) at the top of the `README.md` file showing the result of the latest build/test workflow of both the machine learning client and web app subsystems.
 - the names of all teammates as links to their GitHub profiles in the `README.md` file.
 - instructions for how to configure and run all parts of your project for any developer on any platform - these instructions must work!
-- instructions for how to import any starter data into the database, if necessary for the system to operate correctly at first.
+- instructions for how to set up any environment variables and import any starter data into the database, as necessary, for the system to operate correctly when run.
+- if there are any "secret" configuration files, such as `.env` or similar files, that are not included in the version control repository, exact instructions for how to create them and what their contents should be must be supplied to the course admins by the due date.
