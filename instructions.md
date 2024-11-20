@@ -10,7 +10,7 @@ In this exercise, you will create a system consisting of three separate but inte
 
 ## Requirements
 
-The system you will build consists of three independent software sub-systems:
+The system you will build consists of three independent software subsystems:
 
 - a **machine learning client** - a program that performs one more more machine learning tasks on data collected from camera, microphone, or other sensor(s)
 - a **web app** - an interface through which web visitors can see the activity and analytical results of the machine learning client
@@ -18,7 +18,7 @@ The system you will build consists of three independent software sub-systems:
 
 A few notes:
 
-- **What to include in this repository**: Code for the machine learning client and web app parts of this system must be stored in this "monorepo" - a single version control repository housing multiple independent subsystems of a single software project. The mongodb database will be run from mongodb's own container image, so will not be stored here, but any instructions for setting it up, running it, and populating it with starter data (if necessary) must be mentioned in the `README.md` file.
+- **What to include in this repository**: Code for the machine learning client and web app parts of this system must be stored in this "monorepo" - a single version control repository housing multiple independent subsystems of a single software project. The MongoDB database will be run from MongoDB's own container image, so will not be stored here, but any instructions for setting it up, running it, and populating it with starter data (if necessary) must be mentioned in the `README.md` file.
 - **What not to include in this repository**: A starter `.gitignore` file has been provided for generic Python programming. However, this should be updated as necessary to make sure that any 3rd-party libraries, modules or other dependencies used by any part of this system are not included in version control. Use `pip` or `pipenv` to document and install any 3rd-party Python software dependencies for both parts independently.
 - **How to start all your containers at once**: Eventually, you must start all your system's containers together using [docker-compose](https://docs.docker.com/compose/) - a tool for starting and configuring multiple docker containers that together are necessary to run a system. However, it recommended to start running each with its own `docker` commands at first until things are more-or-less working as expected, and then integrate `docker-compose` once all parts of your system are running as expected.
 
@@ -151,4 +151,4 @@ Replace the contents of the [README.md](./README.md) file with a beautifully-for
 - the names of all teammates as links to their GitHub profiles in the `README.md` file.
 - instructions for how to configure and run all parts of your project for any developer on any platform - these instructions must work!
 - instructions for how to set up any environment variables and import any starter data into the database, as necessary, for the system to operate correctly when run.
-- if there are any "secret" configuration files, such as `.env` or similar files, that are not included in the version control repository, exact instructions for how to create them and what their contents should be must be supplied to the course admins by the due date.
+- if there are any "secret" configuration files, such as `.env` or similar files, that are not included in the version control repository, examples of these files, such as `env.example`, with dummy data must be included in the repository and exact instructions for how to create the proper configuration files and what their contents should be must be supplied to the course admins by the due date.
