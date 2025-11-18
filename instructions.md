@@ -86,31 +86,34 @@ Each team must have at least `3` standup meetings per week. In these meetings, e
 One team member must collect the answers each team member gave to each of these questions and post a report of the standup to the team's communication channel. For example:
 
 ```txt
-Standup Report - 24 January 2023
---------------------------------
+# Standup Report - 24 January 2023
 
-Flora Rosenkrist @florarose
-- did: implemented upload selfie functionality
-- doing: debugging the tensorflow model
-- blockers: none
+## Flora Rosenkrist @florarose
+- **did**: implemented upload selfie functionality
+- **doing**: debugging the tensorflow model
+- **blockers**: none
 
-Chad Mugabe @chmug
-- did: taking camera photos every 1 second using opencv
-- doing: integrating pytorch with flask
-- blockers: none
+## Chad Mugabe @chmug
+- **did**: taking camera photos every 1 second using opencv
+- **doing**: integrating pytorch with flask
+- **blockers**: none
 
-Trish McPerson @tmcfer
-- did: finished user and edit profile
-- doing: working on the background image issue
-- blockers: just diagnosed with covid + midterm - out till Monday
+## Trish McPerson @tmcfer
+- **did**: finished user and edit profile
+- **doing**: working on the background image issue
+- **blockers**: just diagnosed with covid + midterm - out till Monday
 
-Pat Sachin @patsach
-- did: map page, merged trish's pull request. refactored audio recording stuff
-- doing: selfie popup, map api integration
-- blockers: none
+## Pat Sachin @patsach
+- **did**: map page, merged trish's pull request. refactored audio recording stuff
+- **doing**: selfie popup, map api integration
+- **blockers**: none
 ```
 
-Blocking problems that the team cannot solve internall must be brought to the attention of the admins/managers immediately.
+The example above shows the Markdown source code. This code should render nicely in the team's messenger system - adjust as necessary for it to do so. It should not appear in the messenger system to others as raw Markdown code, and the usernames prefixed with `@` signs, e.g. `@florarose`, should be active links to that user's messenger system profile. Make it look neat and well-formatted, edit as many times as necessary to achieve this.
+
+### Blocking issues
+
+Blocking problems that the team cannot solve internally by the next meeting must be brought to the attention of the admins/managers immediately.
 
 ### Individual contributions
 
