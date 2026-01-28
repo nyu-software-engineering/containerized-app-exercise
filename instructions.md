@@ -45,7 +45,7 @@ The machine learning client will be written in Python and will connect to the da
 - Metadata about the collected data, including the results of any analysis performed, must be saved to the database. How frequently the client communicates with the database must make sense for your application.
 - The code must be formatted in accordance with [PEP 8](https://www.python.org/dev/peps/pep-0008/) using the [black](https://black.readthedocs.io/en/stable/) formatter and [pylint](https://pylint.org/) linter to ensure correctness.
 - Unit tests using [pytest](https://docs.pytest.org/en/7.2.x/) must be written for the client device code that provide at least 80% code coverage of the client code, as reported by the [coverage](https://coverage.readthedocs.io/) tool.
-- The client must have a Continuous Integration (CI) workflow using [GitHub Actions](https://github.com/features/actions) that automatically builds and tests the updated client subsystem every time a pull request is approved and code is merged into the `main` branch.
+- The client must have a Continuous Integration (CI) workflow using [GitHub Actions](https://github.com/features/actions) that automatically builds and tests the updated client subsystem every time a pull request is approved and code is merged into the `main`/`master` branch.
 - Like the other parts, the machine learning client must run within its own Docker container.
 - Put all code for this subsystem within the `machine-learning-client` subdirectory of this repository.
 
@@ -58,7 +58,7 @@ The web app must be built using the Python [flask](https://palletsprojects.com/p
 - The server must store the data received in a database and provide a web dashboard for users to visualize the data.
 - The code must also be formatted in accordance with `PEP 8` using the `black` formatter and `pylint` linter to ensure correctness.
 - Unit tests using `pytest` and [pytest-flask](https://pytest-flask.readthedocs.io/en/latest/) must be written for the web app code that provide at least 80% code coverage of the server code.
-- The web app must have a Continuous Integration / (CI) workflow using [GitHub Actions](https://github.com/features/actions) that automatically builds, tests the updated subsystem every time a pull request is approved and code is merged into the `main` branch.
+- The web app must have a Continuous Integration / (CI) workflow using [GitHub Actions](https://github.com/features/actions) that automatically builds, tests the updated subsystem every time a pull request is approved and code is merged into the `main`/`master` branch.
 - Like the other parts, the web app must run within its own Docker container.
 - Put all code for this subsystem within the `web-app` subdirectory of this repository.
 
@@ -121,17 +121,17 @@ All team members must have visibly contributed to the code using their own git &
 
 ### Feature branch workflow
 
-All code changes must be done in feature branches and not directly in the `main` branch.
+All code changes must be done in feature branches and not directly in the `main`/`master` branch.
 
-To merge code from a feature branch into the `main` branch, do the following:
+To merge code from a feature branch into the `main`/`master` branch, do the following:
 
-1. Create a pull request from the feature branch to the `main` branch.
+1. Create a pull request from the feature branch to the `main`/`master` branch.
 1. Ask a fellow developer to review your code.
 1. The reviewer must review the code and run unit tests to verify that the functions behave as expected.
 1. If the reviewer has any concerns, discuss then and make any changes agreed upon.
-1. Merge the pull request into the `main` branch.
+1. Merge the pull request into the `main`/`master` branch.
 1. Delete the feature branch.
-1. Pull the latest changes from the remote `main` branch to your local `main` branch.
+1. Pull the latest changes from the remote `main`/`master` branch to your local `main`/`master` branch.
 
 All developers are expected to participate in reviewing and approving teammates' pull requests.
 
