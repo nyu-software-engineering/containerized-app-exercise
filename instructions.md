@@ -2,6 +2,14 @@
 
 Build a containerized app made up of multiple subsystems, each operating in a container.
 
+## Team repository
+
+Your team works from a single shared GitHub repository.
+
+To create it, exactly one member of the team - decide among yourselves who - clicks the `Fork` button on this repository to make a copy of it in their own GitHub account. That member then gives the rest of the team access to it: in the new repository's `Settings` tab, under `Collaborators and teams`, add each teammate and the course admins by their GitHub usernames. Everyone else clones that one shared repository, rather than making further copies of their own.
+
+Post the web address of the team's repository in the team's Discord channel once it exists. That is how the work is submitted.
+
 ## Concept
 
 Containers are small-footprint, portable, isolated environments within which applications can run.
@@ -125,7 +133,7 @@ All code changes must be done in feature branches and not directly in the `main`
 
 To merge code from a feature branch into the `main`/`master` branch, do the following:
 
-1. Create a pull request from the feature branch to the `main`/`master` branch.
+1. Create a pull request from the feature branch to the `main`/`master` branch. Because your team's repository is a fork of the instructor's, GitHub will set the `base repository` of the pull request to the instructor's repository - change it back to your own team's repository before creating it, or your teammates will not be able to review or merge your work.
 1. Ask a fellow developer to review your code.
 1. The reviewer must review the code and run unit tests to verify that the functions behave as expected.
 1. If the reviewer has any concerns, discuss then and make any changes agreed upon.
