@@ -4,16 +4,17 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pylint = "*"
-black = "*"
 flask = "*"
 pymongo = "*"
 python-dotenv = "*"
+requests = "*"
 
 [dev-packages]
 pytest = "*"
 pytest-flask = "*"
 pytest-cov = "*"
+pylint = "*"
+black = "*"
 
 [requires]
 python_version = "3.12"
