@@ -1,0 +1,9 @@
+mediapipe
+numpy
+pillow
+onnxruntime
+huggingface_hub
+flask
+pymongo
+pytest
+pytest-cov
