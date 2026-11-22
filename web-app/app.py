@@ -50,10 +50,10 @@ def index():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        email = request.form["email"].strip().lower()
+        username = request.form["username"].strip().lower()
         password = request.form["password"]
 
-        data = db.users.find_one({"email": email})
+        data = db.users.find_one({"username": username})
 
         if data and check_password_hash(data["password_hash"], password):
             user = User()
@@ -66,9 +66,9 @@ def login():
 
         return render_template("login.html", error="incorrect email or password")
 
-    return render_template(url_for("login.html"))
+    return render_template("login.html")
 
-@app.route("signup", methods=["GET", "POST"])
+@app.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
         email = request.form["email"]
@@ -83,7 +83,7 @@ def signup():
 
         try:
             db.users.insert_one({
-                "username": username,
+                "username": username.strip().lower(),
                 "email": email,
                 "password_hash": generate_password_hash(password)
             })
@@ -98,10 +98,13 @@ def signup():
 @app.route("/home")
 @flask_login.login_required
 def home():
-    return render_template("home.html")
+    return render_template("home.html", username = flask_login.current_user.username)
 
 @app.route('/logout')
 @flask_login.login_required
 def logout():
     flask_login.logout_user()
     return redirect(url_for("login"))
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)
