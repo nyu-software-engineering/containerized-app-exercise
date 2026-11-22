@@ -98,7 +98,13 @@ def signup():
 @app.route("/home")
 @flask_login.login_required
 def home():
-    return render_template("home.html", username = flask_login.current_user.username)
+    """Show the logged-in user's sounds, newest first."""
+    sounds = db.sounds.find({"user_id": flask_login.current_user.id}).sort(
+        "created_at", -1
+    )
+    return render_template(
+        "home.html", username=flask_login.current_user.username, sounds=list(sounds)
+    )
 
 @app.route('/logout')
 @flask_login.login_required
