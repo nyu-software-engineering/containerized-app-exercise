@@ -10,7 +10,7 @@
 <section class="sound-grid">
     {% for sound in sounds %}
     <article class="sound-card">
-        <h2>{{ sound.name }}</h2>
+        <h2><a href="{{ url_for('sound_detail', sound_id=sound._id) }}">{{ sound.name }}</a></h2>
         <p class="subtitle">{{ sound.material }}</p>
         <p>Instrument: {{ sound.instrument.type if sound.instrument else "not generated yet" }}</p>
         <p>Note: {{ sound.analysis.note if sound.analysis else "-" }}</p>

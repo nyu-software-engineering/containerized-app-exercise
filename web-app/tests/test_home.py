@@ -57,3 +57,31 @@ def test_home_sound_not_analyzed(client):  # pylint: disable=redefined-outer-nam
     response = client.get("/home")
     assert b"New clip" in response.data
     assert b"not generated yet" in response.data
+
+
+def test_sound_detail(client):  # pylint: disable=redefined-outer-name
+    """A user can open the page for one of their sounds."""
+    sound_id = db.sounds.insert_one(
+        {"user_id": get_user_id(), "name": "Glass tap", "material": "glass"}
+    ).inserted_id
+
+    response = client.get(f"/sounds/{sound_id}")
+    assert response.status_code == 200
+    assert b"Glass tap" in response.data
+    assert b"glass" in response.data
+
+
+def test_sound_detail_bad_id(client):  # pylint: disable=redefined-outer-name
+    """A made up id gives a 404."""
+    response = client.get("/sounds/not-a-real-id")
+    assert response.status_code == 404
+
+
+def test_sound_detail_someone_elses(client):  # pylint: disable=redefined-outer-name
+    """Users can't see other users' sounds."""
+    sound_id = db.sounds.insert_one(
+        {"user_id": "someone else", "name": "Not mine"}
+    ).inserted_id
+
+    response = client.get(f"/sounds/{sound_id}")
+    assert response.status_code == 404

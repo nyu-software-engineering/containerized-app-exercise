@@ -3,7 +3,7 @@
 import os
 import pymongo
 from dotenv import load_dotenv
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, abort
 from bson.objectid import ObjectId
 from bson.errors import InvalidId
 import flask_login
@@ -118,6 +118,23 @@ def home():
     return render_template(
         "home.html", username=flask_login.current_user.username, sounds=list(sounds)
     )
+
+
+@app.route("/sounds/<sound_id>")
+@flask_login.login_required
+def sound_detail(sound_id):
+    """Show one of the logged-in user's sounds."""
+    try:
+        sound = db.sounds.find_one(
+            {"_id": ObjectId(sound_id), "user_id": flask_login.current_user.id}
+        )
+    except InvalidId:
+        abort(404)
+
+    if sound is None:
+        abort(404)
+
+    return render_template("sound.html", sound=sound)
 
 
 @app.route("/logout")
