@@ -1,13 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Tactile</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    </head>
+{% extends "base.html" %}
 
-    <body>
-        <h1 class="white">Welcome {{ username }}!</h1>
-    </body>
-</html>
+{% block title %}Home · Tactile{% endblock %}
+
+{% block content %}
+<h1 class="white">Welcome {{ username }}!</h1>
+<p class="subtitle">Your material orchestra · {{ sounds | length }} sounds</p>
+
+{% if sounds %}
+<section class="sound-grid">
+    {% for sound in sounds %}
+    <article class="sound-card">
+        <h2>{{ sound.name }}</h2>
+        <p class="subtitle">{{ sound.material }}</p>
+        <p>Instrument: {{ sound.instrument.type if sound.instrument else "not generated yet" }}</p>
+        <p>Note: {{ sound.analysis.note if sound.analysis else "-" }}</p>
+        {% if sound.analysis and sound.analysis.tags %}
+        <ul class="tags">
+            {% for tag in sound.analysis.tags %}
+            <li>{{ tag }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </article>
+    {% endfor %}
+</section>
+{% else %}
+<p class="empty">You haven't recorded any sounds yet. Record an everyday sound to make your first instrument!</p>
+{% endif %}
+{% endblock %}
