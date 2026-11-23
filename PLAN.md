@@ -81,8 +81,7 @@ example
 Sessions list: date, length, key
 Session page: chord timeline, replay with a speed control, and the number of times tracking dropped out
 Overall stats: average session length, longest session, favorite chords (a bar chart)
-
-(+ a seed script w some sample sessions so the dashboard isnt empty on first run? optionally- just for demo)
+(+ a seed script w some sample sessions so the dashboard isnt empty on first run)
 
 
 Proj 4 reqs:<br>
