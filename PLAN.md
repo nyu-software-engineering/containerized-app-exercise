@@ -8,9 +8,11 @@ Chords: (1 to 8)
 1: thumb out
 2: thumb index
 etc 1 to 5, each time add the next finger
-6 to 8 -- subtract a finger from the other end
+6 to 8 -- subtract a finger starting from the thumb
 eg: 6: all fingers except thumb
 (this way there are no repeating combos)
+(a pose has to be held ~100-150ms before the chord changes, so the in between poses while switching dont trigger)
+
 
 RH can be melody
 vertical scale
@@ -18,6 +20,7 @@ pinch to play, if not pinched then notes aren't played but it automatically hold
 FIST = nothing playing
 
 FIST OR HANDS LEAVE SCREEN = MUSIC STOPS PLAYING
+(hand has to be gone for ~300ms, so quick tracking glitches dont cut the music)
 
 Architecture:
 
@@ -46,7 +49,7 @@ main loop, ~ 15–20 times per sec or so:
 2.  Flask forwards it to the ML client at http://ml-client:5001/analyze; Compose finds containers by service name.
 3.  The ML client runs MediaPipe, works out the left-hand chord and the right-hand pinch, lane and fist, and returns JSON.
 4.  The browser draws the overlay and plays the piano.
-5.  When a chord or note changes, the ML client saves an event to Mongo.
+5.  When a chord or note changes (or the music stops), the ML client saves an event to Mongo.
 
 example response from /analyze:
 {
@@ -58,10 +61,11 @@ example response from /analyze:
 MONGODB:
 sessions
 - One play session (from start to stop):
-- _id, started_at, ended_at, key, scale
+- _id, started_at, ended_at, key, scale, dropouts (times tracking dropped out)
 events
-- One chord change or note played:
+- One chord change, note played, or stop (only saved when something changes, not every frame)
 - session_id, t, hand, type, degree, name
+- type = chord / stop for LH, note_on / note_off for RH
 
 example
 (t = time, in UTC / Z / Zulu)
@@ -73,12 +77,12 @@ example
   "degree": 4,
   "name": "F"
 }
-
 **What the Dashboard Shows**:
 Sessions list: date, length, key
 Session page: chord timeline, replay with a speed control, and the number of times tracking dropped out
 Overall stats: average session length, longest session, favorite chords (a bar chart)
 
+(+ a seed script w some sample sessions so the dashboard isnt empty on first run? optionally- just for demo)
 
 
 Proj 4 reqs:<br>
@@ -97,3 +101,11 @@ Play page (live overlay) + dashboard (session history)<br>
 Web app<br>
 **Three containers, started with Docker Compose**<br>
 web-app, ml-client, mongodb (official mongo image)<br>
+**black + pylint**<br>
+lint workflow already in the repo, runs on every PR<br>
+**pytest, 80%+ coverage for both ML client and web app**<br>
+test the pose logic w fake hand points, mock MediaPipe + Mongo<br>
+**CI for each subsystem**<br>
+GitHub Actions builds + tests on merge to main, badge for each in README<br>
+**README**<br>
+description, teammate links, setup that works on any platform, env.example<br>
