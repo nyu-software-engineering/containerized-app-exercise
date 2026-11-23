@@ -73,4 +73,27 @@ example
   "degree": 4,
   "name": "F"
 }
-Dashboard reads these to show past sessions, most used chords, notes per minute (????)
+
+**What the Dashboard Shows**:
+Sessions list: date, length, key
+Session page: chord timeline, replay with a speed control, and the number of times tracking dropped out
+Overall stats: average session length, longest session, favorite chords (a bar chart)
+
+
+
+Proj 4 reqs:<br>
+**ML client collects sensor data:** <br>
+Webcam frames, captured in the browser and passed to the ML client<br>
+**ML client does real analysis**<br>
+MediaPipe hand landmarks
+our pose -> chord and pinch -> note system<br>
+**Results saved to MongoDB**<br>
+sessions and events collections<br>
+**ML client has no UI**<br>
+It only exposes an internal API; users only see the web app<br>
+**Web app shows activity and results**<br>
+Play page (live overlay) + dashboard (session history)<br>
+**Flask + pymongo**<br>
+Web app<br>
+**Three containers, started with Docker Compose**<br>
+web-app, ml-client, mongodb (official mongo image)<br>
