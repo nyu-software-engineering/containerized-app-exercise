@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}{{ sound.name }} · Tactile{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('home') }}">&larr; Back to home</a>
+
+<article class="sound-card">
+    <h1>{{ sound.name }}</h1>
+    <p class="subtitle">{{ sound.material }}</p>
+    <p>Instrument: {{ sound.instrument.type if sound.instrument else "not generated yet" }}</p>
+    <p>Note: {{ sound.analysis.note if sound.analysis else "-" }}</p>
+</article>
+{% endblock %}
