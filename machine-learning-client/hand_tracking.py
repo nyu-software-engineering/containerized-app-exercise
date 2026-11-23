@@ -34,3 +34,4 @@ def detect_hand(image_bytes):
         return None
 
     return result.hand_landmarks[0]
+    
