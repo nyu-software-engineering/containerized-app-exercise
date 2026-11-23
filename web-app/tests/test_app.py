@@ -7,9 +7,9 @@ import pytest
 import requests
 from pymongo.errors import PyMongoError
 
-from app import classify_image, create_app
+from app import classify_image, create_app  # pylint: disable=import-error
 
-# pylint: disable=redefined-outer-name
+# pylint: disable=redefined-outer-name,too-few-public-methods
 
 
 class FakeResponse:
