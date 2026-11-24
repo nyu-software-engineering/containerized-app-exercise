@@ -27,7 +27,7 @@ jobs:
           working-directory: machine-learning-client
           run: pipenv run pylint --init-hook="import sys;
           sys.path.insert(0,'.')" main.py tests/
-      - name: Pylint (MLC)
+      - name: Pylint (Web app)
         if: matrix.subdir == 'web-app'
           working-directory: web-app
           run: pipenv run pylint .
@@ -37,3 +37,6 @@ jobs:
         run: |
           cd ${{ matrix.subdir }}
           pipenv run black --diff --check .
+      - name: Run tests 
+        working-directory: ${{ matrix.subdir }}
+        run: pipenv run pytest --cov --cov-report=term-missing --cov-fail-under 80
