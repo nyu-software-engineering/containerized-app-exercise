@@ -188,26 +188,6 @@ tr.active td {
   color: rgba(255, 255, 255, 0.6);
 }
 
-/* stats, bottom right */
-.readout {
-  position: fixed;
-  right: 24px;
-  bottom: 20px;
-  margin: 0;
-  display: grid;
-  grid-template-columns: auto auto;
-  gap: 4px 20px;
-}
-
-dt {
-  color: rgba(255, 255, 255, 0.3);
-}
-
-dd {
-  margin: 0;
-  text-align: right;
-}
-
 /* settings panel on the right */
 .settings {
   position: fixed;

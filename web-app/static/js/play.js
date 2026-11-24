@@ -26,7 +26,6 @@ const HAND_CONNECTIONS = [
   [0, 17],
 ];
 const FINGERTIPS = [4, 8, 12, 16, 20];
-const FINGER_NAMES = ["T", "I", "M", "R", "P"];
 const FRAME_WIDTH = 320;
 
 // legend glyph: one rectangle per finger, drawn like a left hand in a mirror
@@ -63,9 +62,6 @@ let sessionId = null;
 let playing = false;
 let soundingDegree = null;
 let sessionStartedAt = 0;
-let lastFrameAt = 0;
-let fps = 0;
-let roundTrip = 0;
 
 // ---------- setup
 
@@ -173,8 +169,6 @@ async function start() {
     playing = true;
     soundingDegree = null;
     sessionStartedAt = performance.now();
-    lastFrameAt = 0;
-    fps = 0;
     setPlaying(true);
     setStatus(`Playing in ${prettyName(keySelect.value)} ${scaleSelect.value}. Hold up your left hand.`);
     requestAnimationFrame(tick);
@@ -231,16 +225,13 @@ function setPlaying(on) {
 
 async function tick() {
   if (!playing) return;
-  const sentAt = performance.now();
   try {
     const result = await postJson("/api/frame", { session_id: sessionId, image: grabFrame() });
     if (!playing) return; // Stop was pressed while this frame was in flight
-    roundTrip = performance.now() - sentAt;
     updateSound(result);
     drawOverlay(result);
     renderChord(result);
     highlightLegend(result.left.degree);
-    updateStats(result);
   } catch (err) {
     if (playing) stop(`Hand tracking stopped: ${err.message}`);
     return;
@@ -389,20 +380,4 @@ function highlightLegend(degree) {
   for (const tr of legend.children) {
     tr.classList.toggle("active", tr.dataset.degree === String(degree));
   }
-}
-
-function updateStats(result) {
-  const now = performance.now();
-  if (lastFrameAt > 0) {
-    const current = 1000 / (now - lastFrameAt);
-    fps = fps === 0 ? current : fps * 0.9 + current * 0.1; // smoothed so it doesn't jump around
-  }
-  lastFrameAt = now;
-
-  $("stat-fps").textContent = `${Math.round(fps)} fps`;
-  $("stat-latency").textContent = `${Math.round(roundTrip)} ms`;
-  $("stat-fingers").textContent = result.fingers
-    ? FINGER_NAMES.map((name, i) => (result.fingers[i] ? name : "·")).join(" ")
-    : "—";
-  $("stat-hands").textContent = (result.hands || []).map((hand) => hand.label).join(", ") || "none";
 }
