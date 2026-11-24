@@ -46,3 +46,9 @@ def test_health(client):
 def test_create_app_without_db():
     """The app builds its own MongoDB client when no db is passed."""
     assert create_app().name == "app"
+
+
+def test_secret_key_from_env(monkeypatch, db):
+    """The secret key comes from the SECRET_KEY environment variable."""
+    monkeypatch.setenv("SECRET_KEY", "test-key")
+    assert create_app(db).secret_key == "test-key"
