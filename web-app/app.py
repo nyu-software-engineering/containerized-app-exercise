@@ -2,13 +2,16 @@
 
 import os
 
+from dotenv import load_dotenv
 from flask import Flask, render_template
 from pymongo import MongoClient
 
 
 def create_app(db=None):
     """Create the Flask app, connecting to MongoDB unless a db is given."""
+    load_dotenv()
     app = Flask(__name__)
+    app.secret_key = os.getenv("SECRET_KEY", "dev")
 
     if db is None:
         client = MongoClient(os.getenv("MONGO_URI", "mongodb://localhost:27017"))
