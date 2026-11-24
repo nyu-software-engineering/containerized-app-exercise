@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Translate · ASL Alphabet{% endblock %}
+{% block content %}
+  <section class="panel">
+    <h1>Picture to letter</h1>
+    <p class="lede">Upload a photo of one ASL alphabet handshape.</p>
+    {% if error %}
+      <p class="banner" role="alert">{{ error }}</p>
+    {% endif %}
+    <form action="{{ url_for('translate') }}" method="post" enctype="multipart/form-data">
+      <label for="image">Handshape photo</label>
+      <input id="image" name="image" type="file" accept="image/*" capture="environment" required>
+      <img id="preview" alt="" hidden>
+      <button type="submit">Translate</button>
+    </form>
+  </section>
+  {% if latest %}
+    <section class="card" aria-live="polite">
+      <p class="eyebrow">Latest letter</p>
+      <p class="letter">{{ latest.letter }}</p>
+      <p class="meta">{{ latest.filename }} · {{ latest.confidence_label }} · {{ latest.created_at }}</p>
+      {% if latest.error %}
+        <p class="banner">{{ latest.error }}</p>
+      {% endif %}
+    </section>
+  {% endif %}
+  <script src="{{ url_for('static', filename='preview.js') }}"></script>
+{% endblock %}

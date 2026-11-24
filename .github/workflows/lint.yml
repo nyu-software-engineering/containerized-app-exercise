@@ -7,13 +7,19 @@ jobs:
     strategy:
       matrix:
         # repeat same job for each subsystem in the following subdirectories
-        subdir: [web-app, machine-learning-client]
+        # web-app is on 3.11 because Pipenv 2026 cannot lock a 3.10 environment;
+        # the machine-learning client stays on 3.10
+        include:
+          - subdir: web-app
+            python-version: "3.11"
+          - subdir: machine-learning-client
+            python-version: "3.10"
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.10" # update version(s) as needed
+          python-version: ${{ matrix.python-version }} # update version(s) as needed
       - name: Install dependencies
         if: ${{ hashFiles(format('{0}/**/*.py', matrix.subdir)) != '' }}
         run: |

@@ -1,0 +1,141 @@
+:root {
+    --ink: #1c1915;
+    --paper: #f4f0e6;
+    --card: #fffdf8;
+    --line: #e2d8c8;
+    --accent: #c4511c;
+    --muted: #5c564c;
+    --alert: #8a2e14;
+    --alert-bg: #f8e6df;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Avenir Next", "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+  
+  .brand {
+    color: inherit;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  
+  nav {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  nav a {
+    color: var(--ink);
+  }
+  
+  main {
+    width: min(40rem, calc(100% - 2rem));
+    margin: 2rem auto 4rem;
+  }
+  
+  h1 {
+    margin: 0 0 0.5rem;
+    font-family: Georgia, "Iowan Old Style", Palatino, serif;
+    font-size: 2.4rem;
+    line-height: 1.1;
+  }
+  
+  .lede,
+  .eyebrow,
+  .meta {
+    margin-top: 0;
+  }
+  
+  .eyebrow,
+  .meta {
+    color: var(--muted);
+  }
+  
+  .panel,
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 1.25rem;
+  }
+  
+  .card {
+    margin-top: 1rem;
+  }
+  
+  form {
+    display: grid;
+    gap: 0.75rem;
+  }
+  
+  input[type="file"] {
+    font: inherit;
+  }
+  
+  button {
+    justify-self: start;
+    background: var(--accent);
+    color: white;
+    border: 0;
+    border-radius: 999px;
+    padding: 0.7rem 1.2rem;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  .letter {
+    margin: 0.25rem 0;
+    font-family: Georgia, "Iowan Old Style", Palatino, serif;
+    font-size: 6rem;
+    line-height: 0.9;
+  }
+  
+  .banner {
+    background: var(--alert-bg);
+    color: var(--alert);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+  }
+  
+  #preview {
+    width: min(100%, 16rem);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th,
+  td {
+    text-align: left;
+    padding: 0.6rem 0.4rem;
+    border-bottom: 1px solid var(--line);
+  }
+  
+  th {
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }

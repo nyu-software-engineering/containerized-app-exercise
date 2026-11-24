@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}History · ASL Alphabet{% endblock %}
+{% block content %}
+  <section class="panel">
+    <h1>Past translations</h1>
+    {% if error %}
+      <p class="banner" role="alert">{{ error }}</p>
+    {% endif %}
+    {% if rows %}
+      <table>
+        <thead>
+          <tr>
+            <th>Letter</th>
+            <th>Confidence</th>
+            <th>File</th>
+            <th>When</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in rows %}
+            <tr>
+              <td>{{ row.letter }}</td>
+              <td>{{ row.confidence_label }}</td>
+              <td>{{ row.filename }}</td>
+              <td>{{ row.created_at }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No translations yet. Upload a handshape on the Translate page.</p>
+    {% endif %}
+  </section>
+{% endblock %}
