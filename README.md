@@ -5,7 +5,7 @@
 
 > **Note:** these badges stay broken until the `ml-client.yml` and `web-app.yml` workflows exist and have run once.
 
-Gesture Piano is a piano you play by waving your hands in front of your webcam. Your left hand picks chords and your right hand plays the melody.
+Gesture Piano is a simplified piano you play by making hand gestures in front of your webcam. Your left hand plays chords and your right hand plays the melody.
 
 You open the app in your browser, hit Start, and hold your hands up to the camera. A machine learning client uses [MediaPipe] hand tracking to figure out what your hands are doing, turns that into chords and notes, and the browser plays them as piano. Everything you play gets saved to a database, and the dashboard shows your past sessions, a timeline of the chords you played, replays of old sessions, and some stats like your favorite chords.
 
@@ -121,7 +121,8 @@ docker compose exec ml-client python seed.py --clear
 
 ## Environment variables
 
-All the settings live in one `.env` file in the repo root, which every container reads. `.env` is gitignored. The repo has an `env.example` with the same keys and dummy values, and we sent the course admins the real contents separately.
+All the settings live in one `.env` file in the repo root, which every container reads. 
+`.env` is gitignored. The repo has an `env.example` with the same keys and dummy values, and we sent the course admins the real contents separately.
 
 | Variable                     | What it's for                                         | Example value                                             |
 | ---------------------------- | ----------------------------------------------------- | --------------------------------------------------------- |
