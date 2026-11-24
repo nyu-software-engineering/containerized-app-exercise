@@ -5,7 +5,6 @@ import mediapipe as mp
 import numpy as np
 from PIL import Image
 
-
 MODEL_PATH = Path(__file__).resolve().parent / "models" / "hand_landmarker.task"
 
 
