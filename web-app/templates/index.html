@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rate My Desk</title>
+  </head>
+  <body>
+    <h1>Rate My Desk</h1>
+    {% if scans %}
+      <ul>
+        {% for scan in scans %}
+          <li>{{ scan.user }}: {{ scan.score }} ({{ scan.tier }})</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No desks rated yet.</p>
+    {% endif %}
+  </body>
+</html>
