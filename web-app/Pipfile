@@ -15,6 +15,7 @@ pytest-flask = "*"
 pytest-cov = "*"
 pylint = "*"
 black = "*"
+mongomock = "*"
 
 [requires]
 python_version = "3.12"
