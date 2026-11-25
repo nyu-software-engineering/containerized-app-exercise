@@ -5,6 +5,7 @@ import os
 from dotenv import load_dotenv
 from flask import Flask, render_template
 from pymongo import MongoClient
+from history import register_history
 
 
 def create_app(db=None):
@@ -25,6 +26,8 @@ def create_app(db=None):
     @app.route("/health")
     def health():
         return {"status": "ok"}
+
+    register_history(app, db)
 
     return app
 

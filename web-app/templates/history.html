@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>History - Rate My Desk</title>
+  </head>
+  <body>
+    <h1>{{ username }}'s desk history</h1>
+    {% if scans %}
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Score</th>
+          <th>Tier</th>
+        </tr>
+        {% for scan in scans %}
+          <tr>
+            <td>{{ scan.created_at.strftime("%b %d, %Y") }}</td>
+            <td>{{ scan.score }}</td>
+            <td>{{ scan.tier }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% else %}
+      <p>No scans yet.</p>
+    {% endif %}
+    <p><a href="{{ url_for('home') }}">Back home</a></p>
+  </body>
+</html>
