@@ -67,6 +67,7 @@ def make_test_image():
     buffer.seek(0)
     return buffer
 
+
 @pytest.fixture
 def app():
     """App backed by an in-memory database."""
@@ -223,13 +224,12 @@ def test_upload_size_limit():
     assert response.status_code == 413
     assert b"5 MB" in response.data
 
+
 def test_translate_rejects_corrupted_image(client):
     """Reject non-image data disguised as a JPEG."""
     response = client.post(
         "/translate",
-        data={
-            "image": (io.BytesIO(b"fake image"), "sign.jpg")
-        },
+        data={"image": (io.BytesIO(b"fake image"), "sign.jpg")},
         content_type="multipart/form-data",
     )
 
@@ -264,21 +264,26 @@ def test_failed_translation_not_saved(client, monkeypatch):
     assert b"No translations yet" in history.data
 
 
-@pytest.mark.parametrize("confidence", [
-    -0.5,
-    1.5,
-    float("nan"),
-    float("inf"),
-    True,
-])
+@pytest.mark.parametrize(
+    "confidence",
+    [
+        -0.5,
+        1.5,
+        float("nan"),
+        float("inf"),
+        True,
+    ],
+)
 def test_invalid_confidence(monkeypatch, confidence):
     """Reject invalid confidence scores."""
 
     def fake_post(*_args, **_kwargs):
-        return FakeResponse({
-            "letter": "A",
-            "confidence": confidence,
-        })
+        return FakeResponse(
+            {
+                "letter": "A",
+                "confidence": confidence,
+            }
+        )
 
     monkeypatch.setattr("app.requests.post", fake_post)
 
@@ -293,10 +298,12 @@ def test_invalid_letter(monkeypatch, letter):
     """Reject predictions outside the English alphabet."""
 
     def fake_post(*_args, **_kwargs):
-        return FakeResponse({
-            "letter": letter,
-            "confidence": 0.9,
-        })
+        return FakeResponse(
+            {
+                "letter": letter,
+                "confidence": 0.9,
+            }
+        )
 
     monkeypatch.setattr("app.requests.post", fake_post)
 
@@ -320,19 +327,24 @@ def test_recognition_timeout(monkeypatch):
     assert result["error"] is not None
 
 
-@pytest.mark.parametrize("reason", [
-    "no_hand",
-    "low_confidence",
-])
+@pytest.mark.parametrize(
+    "reason",
+    [
+        "no_hand",
+        "low_confidence",
+    ],
+)
 def test_recognition_failure_reason(monkeypatch, reason):
     """Handle expected ML recognition failures."""
 
     def fake_post(*_args, **_kwargs):
-        return FakeResponse({
-            "label": None,
-            "confidence": 0.2,
-            "reason": reason,
-        })
+        return FakeResponse(
+            {
+                "label": None,
+                "confidence": 0.2,
+                "reason": reason,
+            }
+        )
 
     monkeypatch.setattr("app.requests.post", fake_post)
 

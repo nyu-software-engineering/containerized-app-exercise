@@ -37,20 +37,24 @@ def predict_sign():
         return jsonify({"error": "Invalid or corrupted image"}), 400
 
     if landmarks is None:
-        return jsonify({
-            "label": None,
-            "confidence": 0.0,
-            "reason": "no_hand",
-        })
+        return jsonify(
+            {
+                "label": None,
+                "confidence": 0.0,
+                "reason": "no_hand",
+            }
+        )
 
     result = predict(landmarks)
 
     if result["confidence"] < CONFIDENCE_THRESHOLD:
-        return jsonify({
-            "label": None,
-            "confidence": result["confidence"],
-            "reason": "low_confidence",
-        })
+        return jsonify(
+            {
+                "label": None,
+                "confidence": result["confidence"],
+                "reason": "low_confidence",
+            }
+        )
 
     return jsonify(result)
 

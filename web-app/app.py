@@ -31,10 +31,16 @@ def validate_image(image_bytes):
 
         return True
 
-    except (UnidentifiedImageError, OSError, ValueError,
-            SyntaxError, Image.DecompressionBombError):
+    except (
+        UnidentifiedImageError,
+        OSError,
+        ValueError,
+        SyntaxError,
+        Image.DecompressionBombError,
+    ):
         return False
-    
+
+
 def create_app(test_config=None):
     """Build the Flask application."""
     app = Flask(__name__)
@@ -217,6 +223,7 @@ def format_confidence(value):
 
     return f"{round(number * 100)}%"
 
+
 def classify_image(image_bytes, filename):
     """Request and validate a prediction from the ML client."""
     url = os.environ.get(
@@ -300,14 +307,20 @@ def classify_image(image_bytes, filename):
             "status": 504,
         }
 
-    except (requests.RequestException, ValueError,
-            TypeError, AttributeError, OverflowError):
+    except (
+        requests.RequestException,
+        ValueError,
+        TypeError,
+        AttributeError,
+        OverflowError,
+    ):
         return {
             "letter": "?",
             "confidence": 0.0,
             "error": "Recognizer is not available yet.",
             "status": 502,
         }
+
 
 if __name__ == "__main__":
     create_app().run(host="0.0.0.0", port=5000)
