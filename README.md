@@ -15,21 +15,21 @@ We use MediaPipe's pretrained hand model and our own rules for turning hand pose
 
 ## How to play
 
-You pick a key and a scale (major or minor) in the settings bar, and both hands play notes from that scale.
+You pick a key and a scale (major or minor) in Settings, and both hands play notes from that scale.
 
-**Left hand (chords).** Hold up fingers to pick a chord. The chord only plays after you hold a pose for a split second, which keeps it from flickering while you switch. It keeps playing until you change poses.
+**Left hand (chords).** Hold up fingers to pick a chord. Count up from your index finger for 1 to 4, open your whole hand for 5, then count up again with your thumb out for 6 to 8. The chord only plays after you hold a pose for a split second, which keeps it from flickering while you switch. It keeps playing until you change poses. The legend on the left of the screen shows every pose.
 
-| Fingers out                | Scale degree | Chord in C major |
-| -------------------------- | ------------ | ---------------- |
-| Thumb                      | 1            | C                |
-| Thumb, index               | 2            | Dm               |
-| Thumb, index, middle       | 3            | Em               |
-| Thumb, index, middle, ring | 4            | F                |
-| All five                   | 5            | G                |
-| Index, middle, ring, pinky | 6            | Am               |
-| Middle, ring, pinky        | 7            | Bdim             |
-| Ring, pinky                | 8            | C (high)         |
-| Fist                       | none         | Silence          |
+| Fingers out                 | Scale degree | Chord in C major |
+| --------------------------- | ------------ | ---------------- |
+| Index                       | 1            | C                |
+| Index, middle               | 2            | Dm               |
+| Index, middle, ring         | 3            | Em               |
+| Index, middle, ring, pinky  | 4            | F                |
+| All five                    | 5            | G                |
+| Thumb                       | 6            | Am               |
+| Thumb, index                | 7            | Bdim             |
+| Thumb, index, middle        | 8            | C (high)         |
+| Fist                        | none         | Silence          |
 
 **Right hand (melody).** Eight note lanes run up the right side of the screen. Pinch your thumb and index finger together to play the note in that lane, and keep pinching to hold it. Open your hand to move between lanes without playing anything new.
 
