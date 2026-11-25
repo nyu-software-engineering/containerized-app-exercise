@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rock Paper Scissors</title>
+  </head>
+  <body>
+    <main>
+      <h1>Rock Paper Scissors</h1>
+      <p>Show your hand to the camera, then send the photo to the agent.</p>
+
+      <video id="camera" autoplay playsinline muted width="480"></video>
+      <canvas id="canvas" hidden></canvas>
+      <img id="preview" alt="Captured hand photo" hidden width="480">
+
+      <div>
+        <button id="start-camera" type="button">Start camera</button>
+        <button id="take-photo" type="button" disabled>Take photo</button>
+        <button id="send-photo" type="button" disabled>Send to agent</button>
+        <button id="retake" type="button" hidden>Retake</button>
+      </div>
+
+      <p id="status" role="status" aria-live="polite"></p>
+      <section id="result" aria-live="polite"></section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/camera.js') }}" defer></script>
+  </body>
+</html>
