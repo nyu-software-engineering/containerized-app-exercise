@@ -181,7 +181,7 @@ def classify_image(image_bytes, filename):
         response.raise_for_status()
         payload = response.json()
         letter = str(payload.get("letter") or payload.get("label") or "?")[:1].upper()
-        if not letter.isalnum():
+        if not letter.isalpha():
             letter = "?"
         confidence = float(payload.get("confidence", 0))
     except (requests.RequestException, ValueError, TypeError, AttributeError):
