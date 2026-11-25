@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Leaderboard - Rate My Desk</title>
+  </head>
+  <body>
+    <h1>Leaderboard</h1>
+    {% if cleanest %}
+      <h2>Cleanest desks</h2>
+      <ol>
+        {% for scan in cleanest %}
+          <li>{{ scan.user }}: {{ scan.score }} ({{ scan.tier }})</li>
+        {% endfor %}
+      </ol>
+      <h2>Messiest desks</h2>
+      <ol>
+        {% for scan in messiest %}
+          <li>{{ scan.user }}: {{ scan.score }} ({{ scan.tier }})</li>
+        {% endfor %}
+      </ol>
+    {% else %}
+      <p>No desks rated yet.</p>
+    {% endif %}
+    <p><a href="{{ url_for('home') }}">Back home</a></p>
+  </body>
+</html>
