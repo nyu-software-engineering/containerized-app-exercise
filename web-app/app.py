@@ -26,6 +26,13 @@ def create_app(test_config=None):
             serverSelectionTimeoutMS=2000,
         )
 
+    # confirm connection
+    try:
+        app.config["MONGO_CLIENT"].admin.command("ping")
+        print("CONNECTED TO MONGODB SUCCESSFULLY!")
+    except Exception as e:
+        print(f"MONGODB CONNECTION FAILED: {e}")
+
     @app.get("/")
     def index():
         """Show the upload page and the newest translation."""
@@ -108,7 +115,7 @@ def safe_latest():
 def collection():
     """Return the translations collection."""
     mongo = current_app.config["MONGO_CLIENT"]
-    return mongo["app"]["translations"]
+    return mongo["asltranslationapp"]["translations"]
 
 
 def load_history():
@@ -118,7 +125,6 @@ def load_history():
 
 
 def save_translation(filename, result):
-    """Insert one translation and return the page fields."""
     document = {
         "letter": result["letter"],
         "confidence": result["confidence"],
@@ -126,10 +132,12 @@ def save_translation(filename, result):
         "created_at": datetime.now(timezone.utc),
         "error": result.get("error"),
     }
+
     try:
         collection().insert_one(document)
     except PyMongoError:
         return None
+
     return serialize(document)
 
 
@@ -162,7 +170,8 @@ def format_confidence(value):
 
 def classify_image(image_bytes, filename):
     """Ask the ML client for a letter. Never raises."""
-    url = os.environ.get("ML_CLIENT_URL", "http://ml-client:5001/classify")
+    # accesing app.py (MLC)
+    url = os.environ.get("ML_CLIENT_URL", "http://ml-client:8000/predict")
     try:
         response = requests.post(
             url,
@@ -171,8 +180,7 @@ def classify_image(image_bytes, filename):
         )
         response.raise_for_status()
         payload = response.json()
-        raw_letter = payload.get("letter")
-        letter = str(raw_letter or "?")[:1].upper()
+        letter = str(payload.get("letter") or payload.get("label") or "?")[:1].upper()
         if not letter.isalpha():
             letter = "?"
         confidence = float(payload.get("confidence", 0))
@@ -182,7 +190,17 @@ def classify_image(image_bytes, filename):
             "confidence": 0.0,
             "error": "Recognizer is not available yet.",
         }
-    return {"letter": letter, "confidence": confidence, "error": None}
+
+    # turn MLC services reason into message the page can show
+    messages = {
+        "no_hand": "No hand detected.",
+        "low_confidence": "Not sure. Try a clearer photo.",
+    }
+    return {
+        "letter": letter,
+        "confidence": confidence,
+        "error": messages.get(payload.get("reason")),
+    }
 
 
 if __name__ == "__main__":
