@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Microphone recorder</title>
+  <script src="{{ url_for('static', filename='record.js') }}" defer></script>
+  <style>
+    body { margin: 0; background: #f2f5f9; color: #17223a; font: 1rem system-ui, sans-serif; }
+    main { max-width: 30rem; margin: 10vh auto; padding: 2rem; }
+    section { background: white; border: 1px solid #dce3ed; border-radius: 1rem; padding: 1.5rem; }
+    button { background: #253d87; color: white; font: inherit; padding: .8rem 1rem; border: 0; border-radius: .5rem; cursor: pointer; }
+    button[data-recording] { background: #9d2831; }
+    button:disabled { opacity: .65; cursor: default; }
+    audio { width: 100%; }
+  </style>
+</head>
+<body>
+  <main>
+    <a href="{{ url_for('index') }}">Home</a>
+    <h1>Microphone recorder</h1>
+    <section aria-label="Recording controls">
+      <button id="record" type="button"><span id="record-icon" aria-hidden="true">🎙</span> <span id="record-label">Start recording</span></button>
+      <p id="status" role="status">Record audio from your microphone.</p>
+      <audio id="playback" controls aria-label="Recorded audio" hidden></audio>
+    </section>
+  </main>
+</body>
+</html>

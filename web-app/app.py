@@ -1,6 +1,6 @@
 """Stub Flask app for the subsystem"""
 
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -8,7 +8,13 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     """Return a Hello World message"""
-    return "Hello, world!"
+    return render_template("index.html")
+
+
+@app.route("/record")
+def record():
+    """Show the microphone recorder."""
+    return render_template("record.html")
 
 
 if __name__ == "__main__":
