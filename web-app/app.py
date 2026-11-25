@@ -54,9 +54,7 @@ def create_app():
             or content_type not in ALLOWED_IMAGE_TYPES
             or not image_bytes
         ):
-            return jsonify(
-                error="Provide a non-empty JPEG, PNG, or WebP image."
-            ), 400
+            return jsonify(error="Provide a non-empty JPEG, PNG, or WebP image."), 400
 
         try:
             response = requests.post(
@@ -74,19 +72,13 @@ def create_app():
             agent_result = response.json()
         except (requests.RequestException, ValueError):
             app.logger.exception("Gesture agent request failed")
-            return jsonify(
-                error="The gesture agent could not read that photo."
-            ), 502
+            return jsonify(error="The gesture agent could not read that photo."), 502
 
         player_move = (
-            agent_result.get("move")
-            if isinstance(agent_result, dict)
-            else None
+            agent_result.get("move") if isinstance(agent_result, dict) else None
         )
         if player_move not in MOVES:
-            return jsonify(
-                error="The agent returned an unknown hand gesture."
-            ), 502
+            return jsonify(error="The agent returned an unknown hand gesture."), 502
 
         opponent_move = random.choice(MOVES)
         if player_move == opponent_move:
@@ -112,12 +104,15 @@ def create_app():
             app.logger.exception("Could not save game result")
             return jsonify(error="Could not save the round result."), 503
 
-        return jsonify(
-            player_move=player_move,
-            opponent_move=opponent_move,
-            outcome=outcome,
-            confidence=game["confidence"],
-        ), 200
+        return (
+            jsonify(
+                player_move=player_move,
+                opponent_move=opponent_move,
+                outcome=outcome,
+                confidence=game["confidence"],
+            ),
+            200,
+        )
 
     @app.errorhandler(413)
     def image_too_large(_error):
