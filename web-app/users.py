@@ -26,4 +26,3 @@ def verify_user(db, username, password):
     if user and check_password_hash(user["password_hash"], password):
         return user
     return None
-    
