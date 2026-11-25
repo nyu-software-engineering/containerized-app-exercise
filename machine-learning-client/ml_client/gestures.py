@@ -39,7 +39,7 @@ def move_from_landmarks(landmarks):
     count = sum(fingers.values())
     if count == 0:
         return "rock"
-    if count == 4 or count == 5:
+    if count in (4, 5):
         return "paper"
     if fingers["index"] and fingers["middle"] and count == 2:
         return "scissors"
