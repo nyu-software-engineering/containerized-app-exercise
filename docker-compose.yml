@@ -1,0 +1,21 @@
+services:
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  web-app:
+    build: ./web-app
+    ports:
+      - "8080:5000"
+    environment:
+      MONGO_URI: mongodb://mongodb:27017
+      MONGO_DBNAME: ${MONGO_DBNAME:-rate_my_desk}
+      SECRET_KEY: ${SECRET_KEY:-dev}
+    depends_on:
+      - mongodb
+
+volumes:
+  mongo-data:
