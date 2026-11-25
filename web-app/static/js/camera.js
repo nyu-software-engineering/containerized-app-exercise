@@ -55,7 +55,7 @@ takeButton.addEventListener("click", () => {
     takeButton.hidden = true;
     sendButton.disabled = false;
     retakeButton.hidden = false;
-    status.textContent = "Photo captured. Send it to the agent when ready.";
+    statusMessage.textContent = "Photo captured. Send it to the agent when ready.";
   }, "image/jpeg", 0.9);
 });
 
