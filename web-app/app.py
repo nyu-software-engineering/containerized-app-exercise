@@ -1,14 +1,13 @@
 """Flask web app for ASL alphabet picture-to-text."""
 
+import io
+import math
 import os
 from datetime import datetime, timezone
 
-import io
-import math
-from PIL import Image, UnidentifiedImageError
-
 import requests
 from flask import Flask, current_app, render_template, request
+from PIL import Image, UnidentifiedImageError
 from pymongo import MongoClient
 from pymongo.errors import PyMongoError
 
