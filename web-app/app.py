@@ -114,6 +114,17 @@ def create_app():
             200,
         )
 
+    @app.route("/history")
+    def history():
+        """Show past rounds and the win, loss and tie counts."""
+        games = list(app.db.games.find().sort("created_at", -1).limit(50))
+        stats = {
+            "win": app.db.games.count_documents({"outcome": "win"}),
+            "loss": app.db.games.count_documents({"outcome": "loss"}),
+            "tie": app.db.games.count_documents({"outcome": "tie"}),
+        }
+        return render_template("history.html", games=games, stats=stats)
+
     @app.errorhandler(413)
     def image_too_large(_error):
         """Return a readable error for oversized photo uploads."""

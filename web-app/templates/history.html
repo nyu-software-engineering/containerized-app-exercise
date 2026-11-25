@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>History - Rock Paper Scissors</title>
+  </head>
+  <body>
+    <main>
+      <h1>History</h1>
+      <p><a href="{{ url_for('home') }}">Back to the game</a></p>
+
+      <h2>Totals</h2>
+      <ul>
+        <li>Wins: {{ stats.win }}</li>
+        <li>Losses: {{ stats.loss }}</li>
+        <li>Ties: {{ stats.tie }}</li>
+      </ul>
+
+      <h2>Last rounds</h2>
+      <table>
+        <tr>
+          <th>Time (UTC)</th>
+          <th>You</th>
+          <th>Agent</th>
+          <th>Result</th>
+        </tr>
+        {% for game in games %}
+        <tr>
+          <td>{{ game.created_at.strftime("%Y-%m-%d %H:%M") }}</td>
+          <td>{{ game.player_move }}</td>
+          <td>{{ game.opponent_move }}</td>
+          <td>{{ game.outcome }}</td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="4">No rounds played yet.</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </main>
+  </body>
+</html>
