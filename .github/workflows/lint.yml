@@ -3,8 +3,10 @@ on: [push, pull_request]
 
 jobs:
   lint-and-format:
+    name: lint ${{ matrix.subdir }}
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false # a failure in one subsystem doesn't cancel the other
       matrix:
         # repeat same job for each subsystem in the following subdirectories
         subdir: [web-app, machine-learning-client]
@@ -24,13 +26,13 @@ jobs:
           pipenv shell --fancy --python $(which python)
       - name: Lint with pylint
         if: ${{ hashFiles(format('{0}/**/*.py', matrix.subdir)) != '' }}
-        # you may set pylint to ignore any files or dependencies that make no sense to lint
+        # lints every .py file in the subsystem, including top-level ones like app.py
         run: |
           cd ${{ matrix.subdir }}
-          pipenv run pylint **/*.py
+          pipenv run pylint --recursive=y --ignore=runs .
       - name: Format with black
         if: ${{ hashFiles(format('{0}/**/*.py', matrix.subdir)) != '' }}
         # you may set black to ignore any files or dependencies that make no sense to format
         run: |
           cd ${{ matrix.subdir }}
-          pipenv run black --diff --check .
+          pipenv run black --diff --check --extend-exclude "/runs/" .
