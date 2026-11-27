@@ -5,7 +5,9 @@ import os
 from dotenv import load_dotenv
 from flask import Flask, render_template
 from pymongo import MongoClient
+from auth import register_auth
 from history import register_history
+from leaderboard import register_leaderboard
 
 
 def create_app(db=None):
@@ -27,7 +29,9 @@ def create_app(db=None):
     def health():
         return {"status": "ok"}
 
+    register_auth(app, db)
     register_history(app, db)
+    register_leaderboard(app, db)
 
     return app
 
