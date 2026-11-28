@@ -1,0 +1,51 @@
+name: ML client CI
+
+on:
+  pull_request:
+    branches: [main, master]
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build test image
+        run: docker build --target test -t receipt-ocr-test ./machine-learning-client
+
+      - name: Run tests with at least 80% coverage
+        run: docker run --rm receipt-ocr-test
+
+      - name: Build runtime image
+        run: docker build -t receipt-ocr ./machine-learning-client
+
+      - name: Scan the sample receipt in the runtime image
+        run: |
+          docker run --rm receipt-ocr samples/corner-deli.png > receipt.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          result = json.loads(Path("receipt.json").read_text())
+          assert "CORNER DELI" in result["raw_text"], result
+          assert result["date"] == "2026-11-25", result
+          assert result["total_cents"] == 1875, result
+          assert result["tax_cents"] == 153, result
+          PY
+
+      - name: Reject an invalid image in the runtime image
+        run: |
+          ocr_exit_code=0
+          docker run --rm \
+            --mount "type=bind,source=$PWD/README.md,target=/data/invalid.png,readonly" \
+            receipt-ocr /data/invalid.png > invalid.stdout 2> invalid.stderr || ocr_exit_code=$?
+          test "$ocr_exit_code" -eq 1
+          test ! -s invalid.stdout
+          grep -Fq "Use a PNG or JPEG receipt image." invalid.stderr

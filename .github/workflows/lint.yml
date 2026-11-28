@@ -1,6 +1,9 @@
 name: lint-free
 on: [push, pull_request]
 
+permissions:
+  contents: read
+
 jobs:
   lint-and-format:
     runs-on: ubuntu-latest
@@ -11,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v6
         with:
           python-version: "3.10" # update version(s) as needed
       - name: Install dependencies
@@ -19,15 +22,14 @@ jobs:
         run: |
           cd ${{ matrix.subdir }}
           python -m pip install --upgrade pip
-          python -m pip install pipenv
-          pipenv sync --dev --python $(which python)
-          pipenv shell --fancy --python $(which python)
+          python -m pip install pipenv==2024.4.1
+          pipenv sync --dev --python "$(command -v python)"
       - name: Lint with pylint
         if: ${{ hashFiles(format('{0}/**/*.py', matrix.subdir)) != '' }}
         # you may set pylint to ignore any files or dependencies that make no sense to lint
         run: |
           cd ${{ matrix.subdir }}
-          pipenv run pylint **/*.py
+          git ls-files -z -- '*.py' | xargs -0 pipenv run pylint
       - name: Format with black
         if: ${{ hashFiles(format('{0}/**/*.py', matrix.subdir)) != '' }}
         # you may set black to ignore any files or dependencies that make no sense to format

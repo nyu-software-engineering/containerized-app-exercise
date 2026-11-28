@@ -13,5 +13,19 @@ The command prints JSON with raw_text, date, total_cents, and tax_cents.
 The sample is a synthetic receipt dated 2026-11-25 with a total of 1875 cents
 and tax of 153 cents. Replace its path with your own receipt, quoted if needed.
 
-Run all tests, including the sample scan:
-    python -m unittest discover -s tests
+For local tests, install Python 3.10 and Pipenv, then run from this directory:
+
+    pipenv sync --dev
+    pipenv run python -m pytest
+    pipenv run black --check receipts tests
+    pipenv run pylint receipts tests
+
+pytest runs the existing unittest tests, including the real sample scan.
+Tesseract with English language data must be installed for the image tests.
+Coverage of the receipts package must be at least 80% or the test command fails.
+
+After editing Pipfile, regenerate and commit Pipfile.lock with Python 3.10:
+    pipenv lock
+
+For Docker build, sample scan, custom-image mounts, and containerized test
+commands, see ../README.md. The Docker test target uses Pipenv 2024.4.1.
